@@ -16,11 +16,13 @@
 ```bash
 make
 ```
-
 或：
-
 ```bash
-latexmk -pdf main.tex
+# pdflatex (default)
+latexmk -pdf -interaction=nonstopmode main.tex
+
+# xelatex
+latexmk -xelatex -pdf -interaction=nonstopmode main.tex
 ```
 
 - **写作入口**：直接改 `main.tex` 里的 “Paper metadata” 与正文内容。
