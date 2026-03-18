@@ -1,7 +1,8 @@
-.PHONY: all pdf clean distclean
+.PHONY: all pdf clean distclean zip
 
 TEX := main.tex
 PDF := $(TEX:.tex=.pdf)
+ZIP := mathpaper.zip
 
 all: pdf
 
@@ -15,4 +16,12 @@ clean:
 distclean: clean
 	latexmk -C $(TEX)
 	rm -f $(PDF)
+
+zip: pdf
+	$(RM) $(ZIP)
+	zip -r $(ZIP) \
+		$(PDF) \
+		$(TEX) mathpaper.sty references.bib amsrn.bst \
+		Makefile README.md .gitignore \
+		-x ".git/*" -x "*.zip" -x ".DS_Store"
 
