@@ -25,7 +25,7 @@ distclean: clean
 	rm -f $(PDF)
 
 zip: pdf
-	$(RM) $(ZIP)
+	$(RM) $(ZIP) mathpaper-*.zip
 	zip -r $(ZIP) \
 		$(PDF) \
 		$(TEX) mathpaper.sty references.bib amsrn.bst \
