@@ -15,3 +15,8 @@
 # Output
 *.pdf
 
+# Zip files
+*.zip
+
+# macOS
+.DS_Store

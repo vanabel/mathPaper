@@ -64,7 +64,7 @@ latexmk -pdf main.tex
 
 那么需要使用**带 arXiv 增强支持的 `amsrn.bst`**（以及同系列 `.bst`）。相关说明与增强版 `.bst` 文件见：
 
-- `https://github.com/vanabel/AMSRefs-arXiv-Support`
+- [AMSRefs-arXiv-Support](https://github.com/vanabel/AMSRefs-arXiv-Support)
 
 （将仓库里的增强版 `amsrn.bst` 替换到你的项目目录即可。）
 
@@ -125,10 +125,3 @@ make clean
 ```bash
 make distclean
 ```
-
----
-
-### 历史版本
-
-如果你不需要保留旧版备份，可以直接删除 `README-legacy.md`。
-

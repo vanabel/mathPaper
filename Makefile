@@ -2,7 +2,8 @@
 
 TEX := main.tex
 PDF := $(TEX:.tex=.pdf)
-ZIP := mathpaper.zip
+VERSION ?= $(shell git describe --tags --abbrev=0 2>/dev/null || echo v0.0.0)
+ZIP := mathpaper-$(VERSION).zip
 
 all: pdf
 
