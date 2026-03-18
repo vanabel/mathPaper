@@ -1,0 +1,131 @@
+% mathpaper.sty -- Preamble bundle for amsart math papers
+% (layout, hyperref, amsrefs, proof/step, theorems+cleveref, common operators)
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{mathpaper}[2025/03/18 Math paper preamble bundle]
+
+% -------------------------
+% Layout & core packages
+% -------------------------
+\RequirePackage[margin=0.8in, includeheadfoot]{geometry}
+\RequirePackage{mathtools, amssymb, mathrsfs}
+\RequirePackage[dvipsnames]{xcolor}
+
+% Hyperlinks (colors configured here)
+\RequirePackage[backref=page]{hyperref}
+\hypersetup{
+  colorlinks,
+  linkcolor = NavyBlue,
+  citecolor = NavyBlue,
+  urlcolor  = NavyBlue,
+}
+
+% Bibliography: AMSRefs (for \cite/\cites with .bib)
+\RequirePackage[abbrev,lite,msc-links,backrefs]{amsrefs}
+
+% -------------------------
+% Proof heading style (bold "Proof.")
+% -------------------------
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{%
+  \par\pushQED{\qed}\normalfont
+  \topsep6\p@\@plus6\p@\relax
+  \trivlist
+  \item[\hskip\labelsep\textbf{#1}\@addpunct{.}]%
+}{%
+  \popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
+% -------------------------
+% A lightweight "Step 1/2/3" helper for proofs
+% -------------------------
+\RequirePackage{etoolbox}
+\RequirePackage{xparse}
+\newcounter{step}
+\pretocmd{\proof}{\setcounter{step}{0}}{}{}
+\NewDocumentCommand{\step}{o}{%
+  \refstepcounter{step}%
+  \par\medskip
+  \noindent\textbf{Step \thestep.}%
+  \textbf{\IfValueT{#1}{~#1.}}%
+  \par\medskip%
+}
+
+% -------------------------
+% Optional: centered small-caps section headings (toggle)
+% -------------------------
+\newif\ifCenteredSectionHeadings
+\CenteredSectionHeadingsfalse % set to \CenteredSectionHeadingstrue if desired
+\ifCenteredSectionHeadings
+  \makeatletter
+  \def\amsartsection{\@startsection{section}{1}%
+    \z@{2.5\linespacing\@plus\linespacing}{1\linespacing}%
+    {\normalfont\scshape\centering}}
+  \let\oldsection\section
+  \renewcommand{\section}{\let\section\amsartsection\oldsection}
+  \makeatother
+\fi
+
+% -------------------------
+% Theorems + cleveref
+% -------------------------
+\RequirePackage{amsthm}
+\RequirePackage{thmtools}
+\RequirePackage[nameinlink]{cleveref}
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{rmk}[thm]{Remark}
+\newtheorem*{clm}{Claim}
+\numberwithin{equation}{section}
+
+% cleveref names
+\crefname{step}{Step}{Steps}
+\Crefname{step}{Step}{Steps}
+\crefname{thm}{Theorem}{Theorems}
+\Crefname{thm}{Theorem}{Theorems}
+\crefname{prop}{Proposition}{Propositions}
+\Crefname{prop}{Proposition}{Propositions}
+\crefname{lem}{Lemma}{Lemmas}
+\Crefname{lem}{Lemma}{Lemmas}
+\crefname{cor}{Corollary}{Corollaries}
+\Crefname{cor}{Corollary}{Corollaries}
+\crefname{rmk}{Remark}{Remarks}
+\Crefname{rmk}{Remark}{Remarks}
+\crefname{defn}{Definition}{Definitions}
+\Crefname{defn}{Definition}{Definitions}
+\crefname{section}{Section}{Sections}
+\Crefname{section}{Section}{Sections}
+\crefname{subsection}{Section}{Sections}
+\Crefname{subsection}{Section}{Sections}
+\crefname{subsubsection}{Section}{Sections}
+\Crefname{subsubsection}{Section}{Sections}
+\crefname{appendix}{Appendix}{Appendices}
+\Crefname{appendix}{Appendix}{Appendices}
+
+% -------------------------
+% Common operators/commands (override in document if needed)
+% -------------------------
+\newcommand{\lh}{\,\rule[-0.05em]{.8em}{.03em}\rule[-.05em]{.03em}{.6em}\,}
+\let\div\relax
+\DeclareMathOperator{\div}{div}
+\DeclareMathOperator{\curl}{curl}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\osc}{osc}
+
+% -------------------------
+% AMSRefs tweak: print misc as "Author, Title, Date, eprint, note."
+% -------------------------
+\BibSpec{misc}{%
+  +{} {\PrintAuthors} {author}
+  +{,} { \textit} {title}
+  +{,} { } {date}
+  +{,} { } {eprint}
+  +{,} { } {note}
+  +{.} {} {transition}
+}
+
+\endinput

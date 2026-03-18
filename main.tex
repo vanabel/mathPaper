@@ -1,0 +1,90 @@
+\documentclass[12pt,reqno]{amsart}
+
+% =====================================================================
+% Template for writing math papers (amsart + mathpaper.sty).
+%
+% Usage:
+% - Edit the "Paper metadata" block below.
+% - Put bib entries into references.bib (or change \bibliography{...}).
+% - Compile: latexmk -pdf main.tex
+% =====================================================================
+
+\usepackage{mathpaper}
+
+% =====================================================================
+% Paper metadata (EDIT THIS BLOCK)
+% =====================================================================
+\title[Short Title]{Full Paper Title Goes Here}
+\date{\today}
+\keywords{keyword 1; keyword 2; keyword 3}
+\subjclass[2020]{Primary 00A05; Secondary 00A06}
+%\thanks{Optional funding / acknowledgements footnote.}
+
+\author{First Author}
+\address{Department, University, City, Country}
+\email{author1@example.edu}
+
+%\author{Second Author}
+%\address{Department, University, City, Country}
+%\email{author2@example.edu}
+
+\begin{document}
+\begin{abstract}
+Write a concise abstract (typically 100--200 words) summarizing the main results
+and methods. Avoid undefined notation when possible.
+\end{abstract}
+\maketitle
+
+\section{Introduction}\label{sec:intro}
+Explain the problem, motivation, and main contributions. A typical outline:
+\begin{itemize}
+  \item Background and related work, e.g. \cite{Doe2024Example}.
+  \item arXiv preprints can be cited too, e.g. \cite{Smith2025ArxivExample}.
+  \item Statement of main results.
+  \item Organization of the paper.
+\end{itemize}
+
+\subsection{Main results}
+\begin{thm}[Example main theorem]\label{thm:main}
+Let \(X\) be a set. Then \(X=X\).
+\end{thm}
+
+\begin{rmk}
+Use \verb|\Cref{thm:main}| for cross references (\Cref{thm:main}).
+\end{rmk}
+
+\section{Preliminaries}\label{sec:prelim}
+Define notation and recall standard facts.
+
+\begin{defn}[Example definition]
+A \emph{widget} is a thing satisfying property~(W).
+\end{defn}
+
+\begin{lem}[Example lemma]\label{lem:tool}
+If \(a=b\), then \(a^2=b^2\).
+\end{lem}
+
+\begin{proof}
+\step[Idea]
+Square both sides.
+\step[Finish]
+The conclusion follows.
+\end{proof}
+
+\section{Proof of the main theorem}\label{sec:proof}
+\begin{proof}[Proof of \Cref{thm:main}]
+Combine \Cref{lem:tool} with the definitions.
+\end{proof}
+
+\appendix
+\section{An optional appendix}\label{app:extra}
+Put technical lemmas or computations here.
+
+\section*{Acknowledgements}
+Write acknowledgements here (optional).
+
+\bigskip
+\bibliography{references}
+\bigskip
+\end{document}
+
