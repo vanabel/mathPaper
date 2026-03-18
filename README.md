@@ -25,6 +25,20 @@ latexmk -pdf -interaction=nonstopmode main.tex
 latexmk -xelatex -pdf -interaction=nonstopmode main.tex
 ```
 
+- **连续编译（文件改动自动重编译）**：
+
+```bash
+# pdflatex watch
+make watch
+
+# xelatex watch
+make watch-xe
+
+# 或者直接用 latexmk 的 watch 模式（pvc = preview continuously）
+latexmk -pdf -pvc -interaction=nonstopmode main.tex
+latexmk -xelatex -pdf -pvc -interaction=nonstopmode main.tex
+```
+
 - **写作入口**：直接改 `main.tex` 里的 “Paper metadata” 与正文内容。
 
 ---

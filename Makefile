@@ -1,4 +1,4 @@
-.PHONY: all pdf clean distclean zip
+.PHONY: all pdf clean distclean zip watch watch-xe
 
 TEX := main.tex
 PDF := $(TEX:.tex=.pdf)
@@ -9,6 +9,12 @@ all: pdf
 
 pdf:
 	latexmk -pdf -interaction=nonstopmode $(TEX)
+
+watch:
+	latexmk -pdf -pvc -interaction=nonstopmode $(TEX)
+
+watch-xe:
+	latexmk -xelatex -pdf -pvc -interaction=nonstopmode $(TEX)
 
 clean:
 	latexmk -c $(TEX)
