@@ -18,5 +18,8 @@
 # Zip files
 *.zip
 
+# Local Make overrides
+Makefile.local
+
 # macOS
 .DS_Store

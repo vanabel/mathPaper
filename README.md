@@ -11,10 +11,14 @@
 
 ### 快速开始
 
+需要 **GNU Make** + **latexmk**（TeX Live / MiKTeX）。Windows 可用 Chocolatey/`winget` 安装 `make`，或在 **Git Bash / MSYS2** 里执行；清理步骤依赖 TeX 自带的 Perl，不依赖 `rm`。`make zip` 优先用 `zip`，没有则用 Windows 上常见的 `7z`/`7za`。
+
 - **编译 PDF**：
 
 ```bash
 make
+make help          # 列出常用目标
+make ENGINE=xe     # 改用 XeLaTeX
 ```
 或：
 ```bash
@@ -22,21 +26,22 @@ make
 latexmk -pdf -interaction=nonstopmode main.tex
 
 # xelatex
-latexmk -xelatex -pdf -interaction=nonstopmode main.tex
+latexmk -xelatex -interaction=nonstopmode main.tex
+```
+
+本地覆盖可复制 `Makefile.local.example` 为 `Makefile.local`（已 gitignore），例如：
+
+```make
+MAIN := other.tex
+ENGINE := xe
 ```
 
 - **连续编译（文件改动自动重编译）**：
 
 ```bash
-# pdflatex watch
-make watch
-
-# xelatex watch
-make watch-xe
-
-# 或者直接用 latexmk 的 watch 模式（pvc = preview continuously）
-latexmk -pdf -pvc -interaction=nonstopmode main.tex
-latexmk -xelatex -pdf -pvc -interaction=nonstopmode main.tex
+make watch         # 同 make live；默认 pdfLaTeX
+make watch-xe      # XeLaTeX
+make stop          # 结束本项目相关编译进程（Unix / Git Bash）
 ```
 
 - **写作入口**：直接改 `main.tex` 里的 “Paper metadata” 与正文内容。
